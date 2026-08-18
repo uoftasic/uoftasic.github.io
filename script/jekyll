@@ -1,0 +1,42 @@
+#!/usr/bin/env bash
+#
+# Run Jekyll inside Docker, so contributors do not need a local Ruby.
+#
+#   script/jekyll build
+#   script/jekyll serve --host 0.0.0.0 --port 4000
+#
+# Gems install into ./vendor/bundle on first use (gitignored) and are reused
+# afterwards. Everything runs as the calling user, so nothing in the working
+# tree ends up owned by root.
+
+set -euo pipefail
+
+RUBY_IMAGE="${RUBY_IMAGE:-ruby:3.3}"
+REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+
+if ! command -v docker >/dev/null 2>&1; then
+  echo "script/jekyll: docker is not installed." >&2
+  echo "Install Docker, or use a local Ruby: bundle install && bundle exec jekyll $*" >&2
+  exit 1
+fi
+
+DOCKER_ARGS=(
+  --rm
+  -u "$(id -u):$(id -g)"
+  -e HOME=/tmp
+  -e BUNDLE_PATH=/site/vendor/bundle
+  -v "$REPO_ROOT:/site"
+  -w /site
+)
+
+# `serve` needs a published port and a TTY so Ctrl-C stops it.
+if [ "${1:-}" = "serve" ]; then
+  DOCKER_ARGS+=(-p "${JEKYLL_PORT:-4000}:${JEKYLL_PORT:-4000}")
+  [ -t 0 ] && DOCKER_ARGS+=(-it)
+fi
+
+# `bundle check` is what makes a fresh clone work: vendor/bundle is gitignored,
+# so without this the first `build` fails with "command not found: jekyll".
+exec docker run "${DOCKER_ARGS[@]}" "$RUBY_IMAGE" \
+  bash -lc 'bundle check >/dev/null 2>&1 || bundle install --quiet; exec bundle exec jekyll "$@"' \
+  -- "$@"

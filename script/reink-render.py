@@ -95,6 +95,22 @@ def reink(src: Image.Image) -> Image.Image:
     return out
 
 
+def cover(img: Image.Image, target_w: int, target_h: int) -> Image.Image:
+    """Scale to fill target_w x target_h, then centre-crop the overflow.
+
+    Resizing to a fixed width and cropping to a fixed height only works while the
+    source happens to be taller than the target aspect. PIL pads an out-of-bounds
+    crop with black rather than failing, so a wide render would silently produce
+    a social card with a black band across it.
+    """
+    scale = max(target_w / img.width, target_h / img.height)
+    resized = img.resize((max(target_w, round(img.width * scale)),
+                          max(target_h, round(img.height * scale))), Image.LANCZOS)
+    left = (resized.width - target_w) // 2
+    top = (resized.height - target_h) // 2
+    return resized.crop((left, top, left + target_w, top + target_h))
+
+
 def save(img: Image.Image, path: Path, colours: int = 24) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     img.convert("P", palette=Image.ADAPTIVE, colors=colours).save(path, optimize=True)
@@ -146,8 +162,7 @@ def main() -> None:
     hero = hero.resize((hero.width * HERO_UPSCALE, hero.height * HERO_UPSCALE), Image.NEAREST)
     save(hero, args.out / f"{args.slug}-hero.png")
 
-    og = die.resize((1200, round(1200 * height / width)), Image.LANCZOS).crop((0, 0, 1200, 630))
-    save(og, args.out / f"{args.slug}-og.png")
+    save(cover(die, 1200, 630), args.out / f"{args.slug}-og.png")
 
     print(
         f"\nNow point _projects/{args.slug}.md at:\n"

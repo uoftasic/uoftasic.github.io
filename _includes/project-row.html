@@ -12,9 +12,7 @@
     <p class="row__summary">{{ p.summary }}</p>
     {% if p.specs %}
       <ul class="chips">
-        {% for spec in p.specs %}
-          {% if forloop.index <= 5 %}<li>{{ spec[1] }}</li>{% endif %}
-        {% endfor %}
+        {% for spec in p.specs limit: 5 %}<li>{{ spec[1] }}</li>{% endfor %}
       </ul>
     {% endif %}
   </div>

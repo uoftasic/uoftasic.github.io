@@ -91,6 +91,7 @@ exclude:
   - package-lock.json
   - playwright.config.ts
   - tests
+  - script
   - README.md
   - "*.code-workspace"
   # An internal document, not a page. Left in the repo but kept out of the

@@ -4,8 +4,8 @@
   "scripts": {
     "build": "bundle exec jekyll build",
     "serve": "bundle exec jekyll serve --port 4000 --host 127.0.0.1 --livereload",
-    "build:docker": "docker run --rm -u \"$(id -u):$(id -g)\" -e HOME=/tmp -e BUNDLE_PATH=/site/vendor/bundle -v \"$PWD:/site\" -w /site ruby:3.3 bundle exec jekyll build",
-    "serve:docker": "docker run --rm -it -u \"$(id -u):$(id -g)\" -e HOME=/tmp -e BUNDLE_PATH=/site/vendor/bundle -p 4000:4000 -v \"$PWD:/site\" -w /site ruby:3.3 bundle exec jekyll serve --host 0.0.0.0 --port 4000",
+    "build:docker": "script/jekyll build",
+    "serve:docker": "script/jekyll serve --host 0.0.0.0 --port 4000",
     "test:visual": "playwright test"
   },
   "devDependencies": {

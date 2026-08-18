@@ -56,7 +56,7 @@ so the geometry is untouched. `script/reink-render.py` does the re-colouring.
 Either works. Use Docker if you would rather not install Ruby.
 
 ```bash
-# Docker — no local Ruby needed
+# Docker — no local Ruby needed. Gems install into vendor/ on first run.
 npm run build:docker
 npm run serve:docker      # http://127.0.0.1:4000
 
@@ -65,6 +65,10 @@ bundle install
 npm run build
 npm run serve             # http://127.0.0.1:4000
 ```
+
+`script/jekyll` is the Docker wrapper behind the `:docker` scripts; it runs any
+Jekyll command (`script/jekyll build --verbose`) as your own user, so nothing in
+the working tree ends up owned by root.
 
 ## Tests
 
@@ -79,6 +83,10 @@ npx playwright install chromium
 npm run build:docker      # the suite serves _site, so build first
 npm run test:visual
 ```
+
+Stop any dev server on port 4000 first. Playwright reuses an existing server, so
+a running `serve` container would be tested instead of the build you just made —
+and `jekyll serve` overrides `site.url` with the local address.
 
 ## Design notes
 

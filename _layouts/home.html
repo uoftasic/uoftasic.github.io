@@ -28,7 +28,7 @@ layout: default
     <div class="hero__caption">
       <div class="hero__caption-inner">
         <span>{{ featured.title }} &middot; {{ featured.caption | default: 'GDS layout' }}</span>
-        <span>{% for spec in featured.specs %}{% if forloop.index <= 4 %}{{ spec[1] }}{% unless forloop.last %} &middot; {% endunless %}{% endif %}{% endfor %}</span>
+        <span>{% for spec in featured.specs limit: 4 %}{{ spec[1] }}{% unless forloop.last %} &middot; {% endunless %}{% endfor %}</span>
       </div>
     </div>
   {% endif %}
