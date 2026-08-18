@@ -1,9 +1,11 @@
+# Primary navigation. `cta: true` renders the item as a filled button.
 main:
-  - title: "Home"
-    url: /
+  - title: "Projects"
+    url: /projects/
+  - title: "Writing"
+    url: /blog/
   - title: "About"
     url: /about/
-  - title: "Blog Posts"
-    url: /posts/
-  - title: "Contact"
-    url: /contact/
+  - title: "Join"
+    url: /join/
+    cta: true

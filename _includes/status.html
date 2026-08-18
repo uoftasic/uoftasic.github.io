@@ -1,0 +1,15 @@
+{%- comment -%}
+Project status badge. `include.status` is the raw front-matter slug; anything
+unrecognised falls back to a neutral chip showing the slug itself, so a typo is
+visible rather than silently blank.
+{%- endcomment -%}
+{%- assign s = include.status | default: 'concept' -%}
+{%- case s -%}
+  {%- when 'concept'      -%}{%- assign label = 'Concept'      -%}
+  {%- when 'in-design'    -%}{%- assign label = 'In design'    -%}
+  {%- when 'verification' -%}{%- assign label = 'Verification' -%}
+  {%- when 'taped-out'    -%}{%- assign label = 'Taped out'    -%}
+  {%- when 'silicon-back' -%}{%- assign label = 'Silicon back' -%}
+  {%- else                -%}{%- assign label = s              -%}
+{%- endcase -%}
+<span class="status status--{{ s }}">{{ label }}</span>

@@ -1,9 +1,9 @@
 ---
-title: "Click ~Clock: Rethinking Digital Design Beyond the Clock "
-categories:
-  - Blog
+title: "Click ~ Clock: rethinking digital design beyond the clock"
+excerpt: "Vishwa Eswaran's workshop on asynchronous circuits, and why local handshakes beat a global clock."
 tags:
   - workshop
+  - asynchronous
 ---
 
 This week, [Vishwa Eswaran](https://linkedin.com/in/vis-esh), an associate from the ASIC Team hosted a technical workshop which introduced asynchronous circuits to the larger ECE undergrad community here at UofT on behalf of the ASIC Team. The workshop was held in BA1240 from 6-8PM on October 9th, 2025.
@@ -18,4 +18,4 @@ The workshop slides can be found [here](/assets/async_circuit_workshop_slides.pd
 
 We attempted to record the workshop session, unfortunately technical difficulties got the better of us and we were unable to retrieve the full recording. The first half of the workshop is on youtube, attached to this post.
 
-{% include video id="EYqoRiIMfbA" provider="youtube" %}
+{% include video.html id="EYqoRiIMfbA" provider="youtube" %}

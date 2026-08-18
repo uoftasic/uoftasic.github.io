@@ -1,0 +1,32 @@
+---
+layout: default
+---
+<div class="shell">
+  <header class="pagehead">
+    <p class="eyebrow">Writing</p>
+    <h1>{{ page.title }}</h1>
+    {% if page.dek %}<p class="dek">{{ page.dek }}</p>{% endif %}
+  </header>
+
+  {% if content != blank %}<div class="prose prose--intro">{{ content }}</div>{% endif %}
+
+  {% if site.posts.size > 0 %}
+    <div class="sechead">
+      <h2>All writing</h2>
+      <span>{{ site.posts.size }} {% if site.posts.size == 1 %}post{% else %}posts{% endif %}</span>
+    </div>
+    <div class="rows">
+      {% for post in site.posts %}
+        <a class="wrow" href="{{ post.url | relative_url }}">
+          <time class="wrow__date" datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: '%d %b %Y' }}</time>
+          <span class="wrow__body">
+            <span class="wrow__title">{{ post.title }}</span>
+            {% if post.excerpt %}<span class="wrow__excerpt">{{ post.excerpt | strip_html | truncatewords: 34 }}</span>{% endif %}
+          </span>
+        </a>
+      {% endfor %}
+    </div>
+  {% else %}
+    <p class="empty">Nothing published yet.</p>
+  {% endif %}
+</div>

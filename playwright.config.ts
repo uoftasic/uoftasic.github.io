@@ -27,10 +27,13 @@ export default defineConfig({
       },
     },
   ],
+  // Serves the already-built site rather than invoking Jekyll, so the suite runs
+  // the same way whether the build came from a local Ruby install or Docker.
+  // Build first: `npm run build`.
   webServer: {
-    command: "bundle exec jekyll serve --port 4000 --host 127.0.0.1",
+    command: "python3 -m http.server 4000 --bind 127.0.0.1 --directory _site",
     url: "http://127.0.0.1:4000",
     reuseExistingServer: !process.env.CI,
-    timeout: 120_000,
+    timeout: 60_000,
   },
 });

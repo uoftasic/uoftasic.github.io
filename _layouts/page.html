@@ -1,11 +1,11 @@
 ---
 layout: default
 ---
-<article class="asic-article asic-page">
-  <header class="asic-datasheet" data-reveal>
-    <h1 class="asic-datasheet__title">{{ page.title }}</h1>
+<article class="shell">
+  <header class="pagehead">
+    {% if page.eyebrow %}<p class="eyebrow">{{ page.eyebrow }}</p>{% endif %}
+    <h1>{{ page.title }}</h1>
+    {% if page.dek %}<p class="dek">{{ page.dek }}</p>{% endif %}
   </header>
-  <div class="asic-prose asic-article__body" data-reveal>
-    {{ content }}
-  </div>
+  <div class="prose">{{ content }}</div>
 </article>

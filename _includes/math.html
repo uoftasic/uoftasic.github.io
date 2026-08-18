@@ -1,0 +1,34 @@
+{%- comment -%}
+KaTeX, loaded only on pages with `math: true` in their front matter, so the
+~90% of pages with no equations pay nothing for it.
+
+kramdown is configured with `math_engine: nil` (see _config.yml) so it leaves
+LaTeX delimiters alone instead of wrapping them in <script type="math/tex">,
+which auto-render cannot process. Authors therefore write plain $...$ and
+$$...$$ in markdown and it renders.
+
+SRI hashes were computed from the pinned files, not copied.
+{%- endcomment -%}
+{%- assign katex_version = "0.16.22" -%}
+<link rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/katex@{{ katex_version }}/dist/katex.min.css"
+      integrity="sha384-5TcZemv2l/9On385z///+d7MSYlvIEw9FuZTIdZ14vJLqWphw7e7ZPuOiCHJcFCP"
+      crossorigin="anonymous">
+<script defer
+        src="https://cdn.jsdelivr.net/npm/katex@{{ katex_version }}/dist/katex.min.js"
+        integrity="sha384-cMkvdD8LoxVzGF/RPUKAcvmm49FQ0oxwDF3BGKtDXcEc+T1b2N+teh/OJfpU0jr6"
+        crossorigin="anonymous"></script>
+<script defer
+        src="https://cdn.jsdelivr.net/npm/katex@{{ katex_version }}/dist/contrib/auto-render.min.js"
+        integrity="sha384-hCXGrW6PitJEwbkoStFjeJxv+fSOOQKOPbJxSfM6G5sWZjAyWhXiTIIAmQqnlLlh"
+        crossorigin="anonymous"
+        onload="renderMathInElement(document.body, {
+          delimiters: [
+            {left: '$$', right: '$$', display: true},
+            {left: '\\[', right: '\\]', display: true},
+            {left: '$',  right: '$',  display: false},
+            {left: '\\(', right: '\\)', display: false}
+          ],
+          ignoredTags: ['script','noscript','style','textarea','pre','code','option'],
+          throwOnError: false
+        });"></script>

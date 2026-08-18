@@ -1,0 +1,13 @@
+---
+# Copy to _posts/YYYY-MM-DD-slug.md. The date in the filename sets the URL and
+# the publication date; the post appears at /blog/<slug>/.
+title: "Post title"
+excerpt: "One or two sentences. Shown on the blog index and the home page."
+tags: [tapeout, sky130]
+# project: simproc   # cross-links this post to a project, both directions
+# math: true         # loads KaTeX on this page only
+---
+
+Normal markdown. Images go in `assets/`, and a YouTube embed is:
+
+{% raw %}{% include video.html id="VIDEO_ID" provider="youtube" %}{% endraw %}
