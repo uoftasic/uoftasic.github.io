@@ -1,0 +1,19 @@
+{%- comment -%}
+Responsive video embed. Replaces the include the old remote theme supplied, so
+existing posts using {% include video id="..." provider="youtube" %} keep
+working. Supported providers: youtube, vimeo.
+{%- endcomment -%}
+{%- if include.provider == 'youtube' -%}
+  {%- assign src = 'https://www.youtube-nocookie.com/embed/' | append: include.id -%}
+{%- elsif include.provider == 'vimeo' -%}
+  {%- assign src = 'https://player.vimeo.com/video/' | append: include.id -%}
+{%- endif -%}
+{%- if src -%}
+<div class="embed">
+  <iframe src="{{ src }}"
+          title="{{ include.title | default: 'Embedded video' }}"
+          loading="lazy" allowfullscreen
+          allow="accelerometer; encrypted-media; gyroscope; picture-in-picture"
+          referrerpolicy="strict-origin-when-cross-origin"></iframe>
+</div>
+{%- endif -%}

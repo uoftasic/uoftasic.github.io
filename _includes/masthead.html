@@ -1,19 +1,31 @@
-<div class="asic-masthead">
-  <div class="asic-masthead__inner">
-    <a class="asic-masthead__brand" href="{{ '/' | relative_url }}">
-      <img src="{{ '/assets/images/asic-logo-transparent.png' | relative_url }}" alt="UofT ASIC Team" height="40" class="asic-masthead__logo">
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="masthead">
+  <div class="masthead__inner">
+    <a class="brand" href="{{ '/' | relative_url }}">
+      {% include mark.html class="brand__mark" %}
+      <span class="brand__name">{{ site.organisation.short_name }}</span>
     </a>
-    <button class="asic-masthead__toggle" type="button" aria-expanded="false" aria-controls="asic-nav" aria-label="Toggle navigation">
+
+    {%- comment -%}
+    JS-free navigation toggle. The checkbox must stay focusable — marking it
+    `hidden` removes it from the tab order and leaves keyboard users with no way
+    to open the menu at all.
+    {%- endcomment -%}
+    <input type="checkbox" id="nav-toggle" class="nav-toggle" aria-label="Toggle navigation">
+    <label for="nav-toggle" class="nav-burger">
       <span></span><span></span><span></span>
-    </button>
-    <nav id="asic-nav" class="asic-masthead__nav" aria-label="Primary">
-      <ul class="asic-masthead__links">
-        {% for link in site.data.navigation.main %}
-          <li>
-            <a href="{{ link.url | relative_url }}"{% if page.url == link.url %} class="is-active"{% endif %}>{{ link.title }}</a>
-          </li>
-        {% endfor %}
-      </ul>
+    </label>
+
+    <nav class="nav" aria-label="Primary">
+      {% for link in site.data.navigation.main %}
+        {% assign is_current = false %}
+        {% if page.url == link.url %}{% assign is_current = true %}
+        {% elsif link.url != '/' and page.url contains link.url %}{% assign is_current = true %}
+        {% endif %}
+        <a href="{{ link.url | relative_url }}"
+           class="nav__link{% if link.cta %} nav__link--cta{% endif %}{% if is_current %} is-current{% endif %}"
+           {% if is_current %}aria-current="page"{% endif %}>{{ link.title }}</a>
+      {% endfor %}
     </nav>
   </div>
-</div>
+</header>

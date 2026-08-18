@@ -1,0 +1,20 @@
+{%- assign p = include.project -%}
+<article class="row">
+  <a class="row__media" href="{{ p.url | relative_url }}" tabindex="-1" aria-hidden="true">
+    {% if p.render %}
+      <img src="{{ p.render | relative_url }}" alt="" loading="lazy" width="760" height="512">
+    {% else %}
+      <span class="row__media--empty"></span>
+    {% endif %}
+  </a>
+  <div class="row__body">
+    <h3 class="row__title"><a href="{{ p.url | relative_url }}">{{ p.title }}</a></h3>
+    <p class="row__summary">{{ p.summary }}</p>
+    {% if p.specs %}
+      <ul class="chips">
+        {% for spec in p.specs limit: 5 %}<li>{{ spec[1] }}</li>{% endfor %}
+      </ul>
+    {% endif %}
+  </div>
+  <div class="row__meta">{% include status.html status=p.status %}</div>
+</article>

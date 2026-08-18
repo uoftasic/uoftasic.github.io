@@ -1,9 +1,18 @@
-_site
-.sass-cache
+_site/
+.jekyll-cache/
 .jekyll-metadata
-Gemfile.lock
-.obsidian
+.sass-cache/
+vendor/
+.bundle/
 node_modules/
 tests/__screenshots__/
-playwright-report/
+*.Zone.Identifier
+
+# Playwright / MCP browser artefacts
+.playwright-mcp/
 test-results/
+playwright-report/
+
+# Python
+__pycache__/
+*.pyc

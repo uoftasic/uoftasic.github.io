@@ -1,29 +1,33 @@
-<footer class="asic-footer">
-  <div class="asic-footer__grid">
-    <div class="asic-footer__brand">
-      <img src="{{ '/assets/images/asic-logo-transparent.png' | relative_url }}" alt="ASIC Toronto" height="52" class="asic-footer__logo">
-      <p class="asic-footer__tagline">The UofT ASIC Team — practical tapeouts, open-source silicon, and IC design resources for undergraduates.</p>
+<footer class="footer">
+  <div class="footer__inner">
+    <div class="footer__brand">
+      {% include mark.html class="footer__mark" %}
+      <p class="footer__name">{{ site.organisation.full_name }}</p>
+      <p class="footer__tagline">{{ site.organisation.tagline }} at the {{ site.organisation.institution }}.</p>
     </div>
-    <div class="asic-footer__col">
-      <h4>Navigate</h4>
+
+    <nav class="footer__col" aria-label="Site">
+      <h2>Site</h2>
       <ul>
         {% for link in site.data.navigation.main %}
           <li><a href="{{ link.url | relative_url }}">{{ link.title }}</a></li>
         {% endfor %}
       </ul>
-    </div>
-    <div class="asic-footer__col">
-      <h4>Connect</h4>
+    </nav>
+
+    <div class="footer__col">
+      <h2>Elsewhere</h2>
       <ul>
-        <li><a href="https://github.com/ieeeuoft-asic" rel="noopener noreferrer">GitHub</a></li>
-        <li><a href="https://www.instagram.com/uoftasic" rel="noopener noreferrer">Instagram</a></li>
-        <li><a href="https://discord.gg/hrJnP5UsGz" rel="noopener noreferrer">Discord</a></li>
-        <li><a href="mailto:team@uoftasic.com">team@uoftasic.com</a></li>
+        <li><a href="{{ site.organisation.github }}" rel="noopener">GitHub</a></li>
+        <li><a href="{{ site.organisation.discord }}" rel="noopener">Discord</a></li>
+        <li><a href="{{ site.organisation.events }}" rel="noopener">Events</a></li>
+        <li><a href="{{ site.organisation.instagram }}" rel="noopener">Instagram</a></li>
+        <li><a href="mailto:{{ site.email }}">{{ site.email }}</a></li>
       </ul>
     </div>
   </div>
-  <div class="asic-footer__bottom">
-    <span>&copy; {{ 'now' | date: '%Y' }} {{ site.title }}</span>
-    <span class="asic-footer__mission">Practical IC opportunities · Open-source community · Resources for all</span>
+  <div class="footer__base">
+    <span>&copy; {{ 'now' | date: '%Y' }} {{ site.organisation.full_name }}</span>
+    <span>Built with open-source silicon tooling.</span>
   </div>
 </footer>

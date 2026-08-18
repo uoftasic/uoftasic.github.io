@@ -1,0 +1,46 @@
+---
+layout: default
+---
+<article class="shell">
+  <header class="pagehead">
+    <p class="eyebrow">Project &middot; {% include status.html status=page.status %}</p>
+    <h1>{{ page.title }}</h1>
+    {% if page.summary %}<p class="dek">{{ page.summary }}</p>{% endif %}
+  </header>
+
+  <div class="withrail">
+    <aside class="rail">
+      {% if page.render %}
+        <img class="rail__render" src="{{ page.render | relative_url }}"
+             alt="Layout render of {{ page.title }}" width="760" height="512">
+      {% endif %}
+      <h2 class="rail__title">Specification</h2>
+      <dl class="rail__list">
+        {% for spec in page.specs %}
+          <div class="spec"><dt>{{ spec[0] }}</dt><dd>{{ spec[1] }}</dd></div>
+        {% endfor %}
+        {% if page.repo %}
+          <div class="spec"><dt>Repository</dt><dd><a href="{{ page.repo }}" rel="noopener">GitHub &#8599;</a></dd></div>
+        {% endif %}
+      </dl>
+    </aside>
+
+    <div class="prose">{{ content }}</div>
+  </div>
+
+  {% assign related = site.posts | where: "project", page.slug %}
+  {% if related.size > 0 %}
+    <section class="related">
+      <div class="sechead"><h2>Writing about this project</h2></div>
+      {% for post in related %}
+        <a class="wrow" href="{{ post.url | relative_url }}">
+          <time class="wrow__date" datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: '%d %b %Y' }}</time>
+          <span class="wrow__body">
+            <span class="wrow__title">{{ post.title }}</span>
+            {% if post.excerpt %}<span class="wrow__excerpt">{{ post.excerpt | strip_html | truncatewords: 26 }}</span>{% endif %}
+          </span>
+        </a>
+      {% endfor %}
+    </section>
+  {% endif %}
+</article>

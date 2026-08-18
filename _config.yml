@@ -1,107 +1,116 @@
-# Welcome to Jekyll!
+# UofT ASIC — site configuration
 #
-# This config file is meant for settings that affect your whole blog, values
-# which you are expected to set up once and rarely edit after that. If you find
-# yourself editing this file very often, consider using Jekyll's data files
-# feature for the data you need to update frequently.
+# GitHub Pages builds this repo with its built-in Jekyll builder (Pages
+# build_type "legacy", branch master). That constrains us to Jekyll 3.x and the
+# plugins Pages whitelists — see the Gemfile. Everything here is core Jekyll or
+# a whitelisted plugin, so `bundle exec jekyll build` locally and the Pages
+# build produce the same site.
 #
-# For technical reasons, this file is *NOT* reloaded automatically when you use
-# 'bundle exec jekyll serve'. If you change this file, please restart the server process.
+# NOTE: this file is NOT reloaded by `jekyll serve`. Restart after editing.
 
-# Site settings
-# These are used to personalize your new site. If you look in the HTML files,
-# you will see them accessed via {{ site.title }}, {{ site.email }}, and so on.
-# You can create any custom variable you would like, and they will be accessible
-# in the templates via {{ site.myvariable }}.
-title: UofT ASIC Team
+title: UofT ASIC
 email: team@uoftasic.com
-description: >- # this means to ignore newlines until "baseurl:"
-  Website of the UofT ASIC Team. Practical IC design opportunities, open-source silicon, and resources for undergraduates at the University of Toronto.
-github_username: ieeeuoft-asic 
-minimal_mistakes_skin: dark
-search: true
+description: >-
+  Undergraduates at the University of Toronto who design, verify and tape out
+  integrated circuits, working entirely in the open-source flow.
+url: "https://uoftasic.com"
+baseurl: ""
+github_username: uoftasic
+lang: en
+timezone: America/Toronto
 
-# Build settings
+# Used by the masthead, footer and structured data.
+organisation:
+  short_name: UofT ASIC
+  full_name: UofT ASIC Team
+  institution: University of Toronto
+  tagline: Undergraduate IC design
+  discord: https://discord.gg/hrJnP5UsGz
+  events: https://lu.ma/uoft-asic
+  instagram: https://www.instagram.com/uoftasic
+  github: https://github.com/uoftasic
+  membership_form: https://docs.google.com/forms/d/e/1FAIpQLSfcVjaUK3G8a9eFQeG-YlMoNPaecRLAIPZiuMQzkatFe4FCpQ/viewform?usp=publish-editor
+
+# Author block consumed by jekyll-seo-tag.
+author:
+  name: UofT ASIC Team
+  email: team@uoftasic.com
+
+social:
+  name: UofT ASIC Team
+  links:
+    - https://github.com/uoftasic
+    - https://www.instagram.com/uoftasic
+
+# With no theme declared the github-pages gem silently falls back to
+# jekyll-theme-primer and starts injecting its layouts and assets. This site
+# owns every layout and include, so opt out explicitly.
+theme: null
+
 markdown: kramdown
-remote_theme: mmistakes/minimal-mistakes
-# Outputting
-permalink: /:categories/:title/
-timezone: # https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+kramdown:
+  input: GFM
+  syntax_highlighter: rouge
+  hard_wrap: false
+  # Leave LaTeX delimiters untouched. kramdown's default engine rewrites math
+  # into <script type="math/tex">, which KaTeX's auto-render cannot see, so
+  # authors would write valid LaTeX and get nothing. See _includes/math.html.
+  math_engine: nil
+
+sass:
+  style: compressed
+
+plugins:
+  - jekyll-seo-tag
+  - jekyll-sitemap
+  - jekyll-feed
+  - jekyll-redirect-from
+  - jemoji
+
+# Projects are a collection, not posts: a project is a living thing with a
+# status that advances, whereas a post is dated and then frozen.
+collections:
+  projects:
+    output: true
+    permalink: /projects/:path/
+
+# Posts keep their existing public URLs. They previously reached /blog/... via a
+# "Blog" category plus a /:categories/:title/ permalink; setting the prefix here
+# instead means the same URLs without every post carrying a redundant category.
+permalink: /blog/:title/
 
 include:
   - _pages
 
-# Exclude from processing.
-# The following items will not be processed, by default. Create a custom list
-# to override the default setting.
-# exclude:
-#   - Gemfile
-#   - Gemfile.lock
-#   - node_modules
-#   - vendor/bundle/
-#   - vendor/cache/
-#   - vendor/gems/
-#   - vendor/ruby/
-
-# Plugins (previously gems:)
-plugins:
-  - jekyll-paginate
-  - jekyll-sitemap
-  - jekyll-gist
-  - jekyll-feed
-  - jemoji
-  - jekyll-include-cache
-
-author:
-  name   : "UofT ASIC Team"
-  avatar : "/assets/images/asic-logo-transparent.png"
-  bio    : "IC Design Team at the University of Toronto focusing on providing tapeout opportunities to Undergraduates"
-  links:
-    - label: "GitHub"
-      icon: "fab fa-fw fa-github"
-      url: "https://github.com/ieeeuoft-asic"
-    - label: "Instagram"
-      icon: "fab fa-fw fa-instagram"
-      url: "https://www.instagram.com/uoftasic"
-    - label: "Email"
-      icon: "fas fa-fw fa-envelope-square"
-      url: "mailto:team@uoftasic.com"
-
-footer:
-  links:
-    - label: "GitHub"
-      icon: "fab fa-fw fa-github"
-      url: "https://github.com/ieeeuoft-asic"
-    - label: "Instagram"
-      icon: "fab fa-fw fa-instagram"
-      url: "https://www.instagram.com/uoftasic"
-    - label: "Email"
-      icon: "fas fa-fw fa-envelope-square"
-      url: "mailto:team@uoftasic.com"
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - vendor
+  - node_modules
+  - package.json
+  - package-lock.json
+  - playwright.config.ts
+  - tests
+  - script
+  - README.md
+  - "*.code-workspace"
+  # An internal document, not a page. Left in the repo but kept out of the
+  # build, where it was being rendered to a URL containing spaces.
+  - "assets/UofT ASIC Sponsorship Package.md"
 
 defaults:
-  # _posts
   - scope:
       path: ""
       type: posts
     values:
-      layout: single
-      author_profile: true
-      read_time: true
-      comments: true
-      share: false
-      related: true
-  # _pages
+      layout: post
+  - scope:
+      path: ""
+      type: projects
+    values:
+      layout: project
   - scope:
       path: "_pages"
       type: pages
     values:
       layout: page
-      author_profile: false
-
-category_archive:
-  type: liquid
-  path: /categories/
-tag_archive:
-  type: liquid
-  path: /tags/

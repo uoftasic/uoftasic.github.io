@@ -1,0 +1,56 @@
+---
+layout: default
+---
+<article class="shell">
+  <header class="pagehead">
+    <p class="eyebrow">Writing</p>
+    <h1>{{ page.title }}</h1>
+    {% if page.excerpt %}<p class="dek">{{ page.excerpt | strip_html | strip_newlines }}</p>{% endif %}
+  </header>
+
+  <div class="withrail">
+    <aside class="rail">
+      <h2 class="rail__title">Article</h2>
+      <dl class="rail__list">
+        <div class="spec">
+          <dt>Published</dt>
+          <dd><time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: '%Y-%m-%d' }}</time></dd>
+        </div>
+        {% if page.tags and page.tags.size > 0 %}
+          <div class="spec">
+            <dt>Topics</dt>
+            <dd>{% for t in page.tags %}{{ t }}{% unless forloop.last %}<br>{% endunless %}{% endfor %}</dd>
+          </div>
+        {% endif %}
+        {% if page.project %}
+          {% assign linked = site.projects | where: "slug", page.project | first %}
+          {% if linked %}
+            <div class="spec">
+              <dt>Project</dt>
+              <dd><a href="{{ linked.url | relative_url }}">{{ linked.title }} &#8599;</a></dd>
+            </div>
+          {% endif %}
+        {% endif %}
+      </dl>
+    </aside>
+
+    <div class="prose">{{ content }}</div>
+  </div>
+
+  {% if page.previous or page.next %}
+    <nav class="postnav" aria-label="More writing">
+      {% if page.previous %}
+        <a class="postnav__link" href="{{ page.previous.url | relative_url }}">
+          <span class="postnav__label">Previous</span>
+          <span class="postnav__title">{{ page.previous.title }}</span>
+        </a>
+      {% endif %}
+      {% if page.next %}
+        <a class="postnav__link postnav__link--next" href="{{ page.next.url | relative_url }}">
+          <span class="postnav__label">Next</span>
+          <span class="postnav__title">{{ page.next.title }}</span>
+        </a>
+      {% endif %}
+    </nav>
+  {% endif %}
+</article>

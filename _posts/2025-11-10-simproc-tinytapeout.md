@@ -1,10 +1,13 @@
 ---
 title: "SimProc: TinyTapeout"
-categories:
-  - Blog
+excerpt: "Submitting an 8-bit processor to the TTSKY25b shuttle — what fit in four tiles, and what did not."
 tags:
+  - tapeout
   - tiny-tapeout
+  - sky130
+project: simproc
 ---
+
  This week, the ASIC Team submitted **SimProc (Simple Processor)** as a part of the TinyTapeout TTSKY25b shuttle on 10 November 2025. 
  
  TinyTapeout provides a multi-project wafer (MPW) platform where each design occupies a small tile within the final ASIC. 

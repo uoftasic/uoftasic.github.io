@@ -1,17 +1,12 @@
 source "https://rubygems.org"
 
+# GitHub Pages builds this site with its own pinned gem set (Pages build_type is
+# "legacy", i.e. the built-in builder rather than Actions). Depending on the
+# github-pages meta-gem keeps local builds identical to production, and pins us
+# to the plugins Pages actually allows. It already provides jekyll-seo-tag,
+# jekyll-sitemap, jekyll-feed, jekyll-redirect-from and jemoji, so those are not
+# listed separately here — doing so only invites version conflicts.
 gem "github-pages", group: :jekyll_plugins
 
 gem "tzinfo-data"
-gem "wdm", "~> 0.1.0" if Gem.win_platform?
-
-# If you have any plugins, put them here!
-group :jekyll_plugins do
-  gem "jekyll-paginate"
-  gem "jekyll-sitemap"
-  gem "jekyll-gist"
-  gem "jekyll-feed"
-  gem "jemoji"
-  gem "jekyll-include-cache"
-  gem "jekyll-algolia"
-end
+gem "webrick", "~> 1.8" # removed from stdlib in Ruby 3.0; needed by `jekyll serve`
