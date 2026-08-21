@@ -50,9 +50,17 @@ async function overflowingElements(page: Page): Promise<string[]> {
 
 for (const route of routes) {
   test(`${route.name}: renders without errors or overflow`, async ({ page }, testInfo) => {
+    // Only our own code should be able to fail this. Third-party embeds (the
+    // YouTube iframe on the async-circuits post, the KaTeX CDN) log errors on a
+    // slow or blocked network, which would otherwise make the suite fail at
+    // random and stop being trusted. Errors from the page's own origin, and any
+    // uncaught exception in the main frame, still count.
     const errors: string[] = [];
+    const isOurs = (url: string) => !url || url.includes("127.0.0.1") || url.includes("localhost");
     page.on("console", (msg) => {
-      if (msg.type() === "error") errors.push(msg.text());
+      if (msg.type() !== "error") return;
+      if (!isOurs(msg.location()?.url ?? "")) return;
+      errors.push(msg.text());
     });
     page.on("pageerror", (err) => errors.push(String(err)));
 

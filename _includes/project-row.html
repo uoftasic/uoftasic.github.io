@@ -10,9 +10,10 @@
   <div class="row__body">
     <h3 class="row__title"><a href="{{ p.url | relative_url }}">{{ p.title }}</a></h3>
     <p class="row__summary">{{ p.summary }}</p>
-    {% if p.specs %}
+    {% if p.pdk or p.specs %}
       <ul class="chips">
-        {% for spec in p.specs limit: 5 %}<li>{{ spec[1] }}</li>{% endfor %}
+        {% if p.pdk %}<li>{{ p.pdk }}</li>{% endif %}
+        {% for spec in p.specs limit: 4 %}<li>{{ spec[1] }}</li>{% endfor %}
       </ul>
     {% endif %}
   </div>

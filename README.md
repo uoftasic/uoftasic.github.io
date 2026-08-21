@@ -19,6 +19,11 @@ Copy `_projects/TEMPLATE.md` to `_projects/<slug>.md`, set `published: true`,
 and fill in the front matter. It appears on `/projects/` and, if
 `featured: true`, its render becomes the home page hero.
 
+`pdk:` is its own field rather than a row in `specs:`, because the process and
+the design name are what identify a layout to an IC engineer — they are the two
+facts on the home page hero, and the PDK leads both the spec rail and the
+project card.
+
 The `specs:` map is free-form — whatever keys you write become the specification
 rail on the project page, in the order you write them. A digital project lists
 cell counts; an analog one can list gain and bandwidth. The first five values

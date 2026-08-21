@@ -3,7 +3,7 @@ layout: default
 ---
 <article class="shell">
   <header class="pagehead">
-    <p class="eyebrow">Project &middot; {% include status.html status=page.status %}</p>
+    <p class="pagehead__status">{% include status.html status=page.status %}</p>
     <h1>{{ page.title }}</h1>
     {% if page.summary %}<p class="dek">{{ page.summary }}</p>{% endif %}
   </header>
@@ -16,6 +16,7 @@ layout: default
       {% endif %}
       <h2 class="rail__title">Specification</h2>
       <dl class="rail__list">
+        {% if page.pdk %}<div class="spec"><dt>PDK</dt><dd>{{ page.pdk }}</dd></div>{% endif %}
         {% for spec in page.specs %}
           <div class="spec"><dt>{{ spec[0] }}</dt><dd>{{ spec[1] }}</dd></div>
         {% endfor %}

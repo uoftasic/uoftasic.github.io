@@ -2,7 +2,6 @@
 layout: page
 permalink: /about/
 title: "About"
-eyebrow: "Who we are"
 dek: "We bring hands-on integrated circuit design to undergraduate students at the University of Toronto."
 ---
 

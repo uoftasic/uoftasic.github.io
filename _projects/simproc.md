@@ -7,12 +7,11 @@ date: 2025-11-10
 featured: true
 render: /assets/projects/simproc-die.png     # card + spec rail
 hero: /assets/projects/simproc-hero.png      # full-bleed home hero
-caption: "GDS layout, TTSKY25b"
+pdk: SKY130
 image: /assets/projects/simproc-og.png
 repo: https://github.com/uoftasic/simproc
 authors: "Saptarshi Talukdar"
 specs:
-  Process: SKY130
   Shuttle: TTSKY25b
   Die area: 2 × 2 tiles
   Clock: 30 MHz

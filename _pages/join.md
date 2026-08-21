@@ -2,7 +2,6 @@
 layout: page
 permalink: /join/
 title: "Get involved"
-eyebrow: "Join the team"
 dek: "Membership is open year-round, to any student, with no prior tapeout experience required."
 redirect_from:
   - /contact/

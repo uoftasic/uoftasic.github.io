@@ -16,7 +16,6 @@ layout: default
     <div class="hero__scrim" aria-hidden="true"></div>
   {% endif %}
   <div class="hero__inner">
-    <p class="hero__eyebrow">{{ site.organisation.tagline }} &middot; {{ site.organisation.institution }}</p>
     <h1 class="hero__title">{{ page.headline | default: 'We design, verify and tape out real silicon.' }}</h1>
     <p class="hero__lead">{{ page.lead }}</p>
     <div class="hero__actions">
@@ -25,12 +24,16 @@ layout: default
     </div>
   </div>
   {% if featured %}
-    <div class="hero__caption">
-      <div class="hero__caption-inner">
-        <span>{{ featured.title }} &middot; {{ featured.caption | default: 'GDS layout' }}</span>
-        <span>{% for spec in featured.specs limit: 4 %}{{ spec[1] }}{% unless forloop.last %} &middot; {% endunless %}{% endfor %}</span>
-      </div>
-    </div>
+    {%- comment -%}
+    Identifies the layout the way a die marking would: the design and the
+    process it was drawn on. Cell counts and the shuttle it rode are on the
+    project page; neither tells an IC engineer what they are looking at.
+    {%- endcomment -%}
+    <p class="hero__caption">
+      <span class="hero__caption-inner">
+        {{ featured.title }}{% if featured.pdk %} <span class="hero__caption-sep">—</span> {{ featured.pdk }}{% endif %}
+      </span>
+    </p>
   {% endif %}
 </section>
 
