@@ -19,6 +19,7 @@ const routes = [
   { name: "post-async", path: "/blog/async-circuits-workshop/" },
   { name: "about", path: "/about/" },
   { name: "join", path: "/join/" },
+  { name: "ad104", path: "/ad104/" },
   { name: "404", path: "/404.html" },
 ];
 
